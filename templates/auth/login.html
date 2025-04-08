@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar sesión - MundoFriki</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/flowbite@latest/dist/flowbite.js"></script>
+  </head>
+  <body class="min-h-screen bg-gray-50">
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b">
+      <div class="container mx-auto px-4 py-3">
+        <div class="flex items-center text-sm text-gray-500">
+          <a href="/" class="hover:text-red-600">Inicio</a>
+          <svg class="h-4 w-4 mx-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+          <span class="text-gray-900 font-medium">Iniciar sesión</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulario de Login -->
+    <div class="container mx-auto px-4 py-12">
+      <div class="max-w-md mx-auto">
+        <!-- Encabezado -->
+        <div class="text-center mb-8">
+          <a href="/" class="inline-block text-3xl font-bold">
+            Mundo<span class="text-red-600">Friki</span>
+          </a>
+          <h1 class="text-2xl font-bold mt-6 mb-2">¡Bienvenido de nuevo!</h1>
+          <p class="text-gray-600">Inicia sesión en tu cuenta para continuar</p>
+        </div>
+
+        <!-- Tarjeta de formulario -->
+        <div class="bg-white rounded-lg shadow-md p-8">
+          <form id="loginForm">
+            <div class="mb-6">
+              <label for="email" class="block text-gray-700 font-medium mb-2">Correo electrónico</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500"
+                placeholder="tu@correo.com"
+                required
+              />
+            </div>
+
+            <div class="mb-6">
+              <div class="flex justify-between items-center mb-2">
+                <label for="password" class="block text-gray-700 font-medium">Contraseña</label>
+                <a href="/forgot-password" class="text-sm text-red-600 hover:text-red-800">¿Olvidaste tu contraseña?</a>
+              </div>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+
+            <div class="flex items-center mb-6">
+              <input
+                type="checkbox"
+                id="remember"
+                name="remember"
+                class="h-4 w-4 text-red-600 focus:ring-red-500 rounded border-gray-300"
+              />
+              <label for="remember" class="ml-2 text-gray-700">Recuérdame</label>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-3 rounded-md transition duration-300"
+            >
+              Iniciar sesión
+            </button>
+          </form>
+
+          <!-- Enlace a registro -->
+          <div class="text-center mt-8">
+            <p class="text-gray-600">
+              ¿No tienes una cuenta?
+              <a href="/register" class="text-red-600 hover:text-red-800 font-medium">Regístrate</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Script para conectar con FastAPI -->
+    <script>
+        const form = document.getElementById("loginForm");
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+      
+          const correo = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+      
+          const res = await fetch("http://127.0.0.1:8000/cliente/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ correo, password }),
+          });
+      
+          const data = await res.json();
+      
+          if (res.ok) {
+            alert("Bienvenido, " + data.nombre);
+      
+            // 👉 Guardamos el usuario en localStorage
+            localStorage.setItem("usuario", JSON.stringify(data));
+      
+            // 👉 Redireccionamos según el rol
+            if (data.rol === "admin") {
+              window.location.href = "/admin";
+            } else {
+              window.location.href = "/dashboard";
+            }
+      
+          } else {
+            alert(data.detail || "Error al iniciar sesión");
+          }
+        });
+      </script>
+      
+  </body>
+</html>

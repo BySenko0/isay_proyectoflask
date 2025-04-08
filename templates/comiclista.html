@@ -1,0 +1,170 @@
+<!DOCTYPE html> 
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mundo Friki - Cómics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/flowbite@latest/dist/flowbite.js"></script>
+  </head>
+  <body class="bg-gray-50 text-gray-900">
+
+    <!-- Banner principal -->
+    <div class="bg-gradient-to-r from-gray-900 to-gray-800 text-white">
+      <div class="container mx-auto px-4 py-12">
+        <h1 class="text-4xl font-bold mb-4">Explora nuestra colección de cómics</h1>
+        <p class="text-lg max-w-3xl">
+          Descubre una gran selección de cómics, desde aventuras clásicas de superhéroes hasta novelas gráficas innovadoras.
+        </p>
+      </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="container mx-auto px-4 py-8">
+      <div class="flex flex-col lg:flex-row gap-8 items-start">
+
+        <!-- Filtros -->
+        <div class="w-full lg:w-1/4">
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="flex justify-between items-center mb-6">
+              <h2 class="text-xl font-bold">Filtros</h2>
+              <button class="text-red-600 text-sm font-medium">Limpiar todo</button>
+            </div>
+
+            <!-- Categorías -->
+            <div class="mb-6">
+              <h3 class="font-semibold mb-3">Categorías</h3>
+              <div class="space-y-2">
+                <label class="flex items-center">
+                  <input type="checkbox" checked class="form-checkbox text-red-600" />
+                  <span class="ml-2 text-sm">Todas las categorías</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="form-checkbox text-red-600" />
+                  <span class="ml-2 text-sm">Superhéroes</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="form-checkbox text-red-600" />
+                  <span class="ml-2 text-sm">Manga</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Precio -->
+            <div class="mb-6">
+              <h3 class="font-semibold mb-3">Rango de precio</h3>
+              <div class="flex items-center gap-2 mb-2">
+                <input type="number" placeholder="0" class="w-full px-2 py-1 border rounded-md text-sm" />
+                <span>-</span>
+                <input type="number" placeholder="100" class="w-full px-2 py-1 border rounded-md text-sm" />
+              </div>
+              <button class="w-full text-sm bg-gray-100 hover:bg-gray-200 py-2 rounded-md">Aplicar</button>
+            </div>
+
+            <!-- Editoriales -->
+            <div class="mb-6">
+              <h3 class="font-semibold mb-3">Editoriales</h3>
+              <div class="space-y-2">
+                <label class="flex items-center">
+                  <input type="checkbox" checked class="form-checkbox text-red-600" />
+                  <span class="ml-2 text-sm">Marvel</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="form-checkbox text-red-600" />
+                  <span class="ml-2 text-sm">DC Comics</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Disponibilidad -->
+            <div>
+              <h3 class="font-semibold mb-3">Disponibilidad</h3>
+              <div class="space-y-2">
+                <label class="flex items-center">
+                  <input type="checkbox" checked class="form-checkbox text-red-600" />
+                  <span class="ml-2 text-sm">En stock</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="form-checkbox text-red-600" />
+                  <span class="ml-2 text-sm">Agotado</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lista de cómics dinámica -->
+        <div class="w-full lg:w-3/4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+
+            <!-- 🔁 Loop dinámico desde el backend -->
+            {% for comic in comics %}
+            <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg">
+              <img src="{{ comic.image_url }}" alt="{{ comic.title }}" class="object-cover w-full h-64" />
+              <div class="p-4">
+                <h3 class="font-bold text-lg mb-1">{{ comic.title }}</h3>
+                <p class="text-gray-600 mb-2">por {{ comic.author }}</p>
+                <div class="flex items-center mb-2">
+                  <div class="text-yellow-400 text-sm mr-2">★ {{ comic.rating }}</div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="font-bold text-xl">${{ comic.price }}</span>
+                  <button class="bg-red-600 hover:bg-red-700 text-white p-2 rounded-full">
+                    🛒
+                  </button>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pie de página -->
+    <footer class="bg-gray-800 text-gray-300">
+      <div class="container mx-auto px-4 py-10">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-xl font-bold mb-4">
+              Mundo<span class="text-red-500">Friki</span>
+            </h3>
+            <p class="mb-4">Tu tienda todo en uno para cómics, novelas gráficas y manga.</p>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Tienda</h3>
+            <ul class="space-y-2">
+              <li><a href="#" class="hover:text-white">Todos los cómics</a></li>
+              <li><a href="#" class="hover:text-white">Nuevos lanzamientos</a></li>
+              <li><a href="#" class="hover:text-white">Más vendidos</a></li>
+              <li><a href="#" class="hover:text-white">Manga</a></li>
+              <li><a href="#" class="hover:text-white">Novelas gráficas</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Ayuda</h3>
+            <ul class="space-y-2">
+              <li><a href="#" class="hover:text-white">Contáctanos</a></li>
+              <li><a href="#" class="hover:text-white">Preguntas frecuentes</a></li>
+              <li><a href="#" class="hover:text-white">Política de envíos</a></li>
+              <li><a href="#" class="hover:text-white">Devoluciones</a></li>
+              <li><a href="#" class="hover:text-white">Privacidad</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Contacto</h3>
+            <p>123 Calle Friki</p>
+            <p>Ciudad Friki, MX</p>
+            <p>Tel: (123) 456-7890</p>
+            <p>Email: contacto@mundofriki.com</p>
+          </div>
+        </div>
+        <div class="border-t border-gray-700 mt-10 pt-6 text-center">
+          <p>&copy; 2025 Mundo Friki. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>

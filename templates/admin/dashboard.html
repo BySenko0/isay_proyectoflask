@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Admin - MundoFriki</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/flowbite@latest/dist/flowbite.js"></script>
+  </head>
+  <body class="bg-gray-100 flex">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-gray-900 text-white hidden md:flex flex-col min-h-screen">
+      <div class="p-4 border-b border-gray-800">
+        <a href="/admin" class="flex items-center">
+          <span class="text-xl font-bold">
+            Mundo<span class="text-red-500">Friki</span>
+          </span>
+          <span class="ml-2 bg-red-600 text-xs px-2 py-1 rounded">Admin</span>
+        </a>
+      </div>
+      <nav class="flex-1 p-4">
+        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">General</p>
+        <ul class="space-y-2">
+          <li>
+            <a href="/admin" class="flex items-center px-4 py-2 bg-gray-800 text-white rounded-md">
+              <svg class="h-5 w-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M13 5v6h6" />
+              </svg>
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a href="/admin/comics" class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-800 rounded-md">
+              <svg class="h-5 w-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h18M3 17h18" />
+              </svg>
+              Comics
+            </a>
+          </li>
+          <li>
+            <a href="/admin/usuarios" class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-800 rounded-md">
+              <svg class="h-5 w-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 15c2.21 0 4.313.535 6.121 1.485M15 11a3 3 0 100-6 3 3 0 000 6zm-6 0a3 3 0 100-6 3 3 0 000 6z" />
+              </svg>
+              Usuarios
+            </a>
+          </li>
+          <li>
+            <a href="/admin/empresas" class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-800 rounded-md">
+              <svg class="h-5 w-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+              </svg>
+              Proveedores
+            </a>
+          </li>
+        </ul>
+
+        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mt-8 mb-4">Configuraciones</p>
+        <ul class="space-y-2">
+          <li>
+            <a href="/admin/configuracion" class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-800 rounded-md">
+              <svg class="h-5 w-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m0 14v1m8-8h1M4 12H3m15.364 6.364l.707.707M6.343 6.343l-.707-.707m0 13.414l.707-.707m12.728-12.728l-.707.707" />
+              </svg>
+              Configuración
+            </a>
+          </li>
+          <li>
+            <a href="/logout" class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-800 rounded-md">
+              <svg class="h-5 w-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1m0-9V4m0 0L5 12l7 8v-1" />
+              </svg>
+              Cerrar sesión
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <main class="flex-1 p-6">
+      <h1 class="text-3xl font-bold mb-6">Panel de Administración</h1>
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div class="bg-white rounded-lg shadow p-4">
+          <h2 class="text-lg font-semibold text-gray-700">Total de Usuarios</h2>
+          <p class="text-2xl mt-2 text-red-600 font-bold">45</p>
+        </div>
+        <div class="bg-white rounded-lg shadow p-4">
+          <h2 class="text-lg font-semibold text-gray-700">Cómics Disponibles</h2>
+          <p class="text-2xl mt-2 text-red-600 font-bold">128</p>
+        </div>
+        <div class="bg-white rounded-lg shadow p-4">
+          <h2 class="text-lg font-semibold text-gray-700">Ventas del Mes</h2>
+          <p class="text-2xl mt-2 text-red-600 font-bold">$1,540.00</p>
+        </div>
+      </div>
+
+      <!-- Placeholder para otras estadísticas -->
+      <div class="mt-10">
+        <h2 class="text-xl font-bold mb-4">Resumen</h2>
+        <div class="bg-white rounded-lg shadow p-6 text-gray-600">
+          Aquí puedes mostrar más estadísticas, gráficas o reportes generales que se obtengan desde tu API.
+        </div>
+      </div>
+    </main>
+
+
+    <!-- Script para consumir tu API -->
+    <script>
+      const API_URL = "http://127.0.0.1:8000"; // Cambia si es necesario
+
+      async function cargarDashboard() {
+        try {
+          const [comicsRes, usuariosRes, ventasRes] = await Promise.all([
+            fetch(API_URL + "/comics"),
+            fetch(API_URL + "/usuarios"),
+            fetch(API_URL + "/ventas")
+          ]);
+
+          const comics = await comicsRes.json();
+          const usuarios = await usuariosRes.json();
+          const ventas = await ventasRes.json();
+
+          document.getElementById("totalComics").textContent = comics.length;
+          document.getElementById("totalUsuarios").textContent = usuarios.length;
+          document.getElementById("totalVentas").textContent = ventas.length;
+
+          const tabla = document.getElementById("tablaComics");
+          comics.slice(0, 5).forEach(c => {
+            const row = `
+              <tr>
+                <td class="px-4 py-2">${c.titulo}</td>
+                <td class="px-4 py-2">${c.categoria}</td>
+                <td class="px-4 py-2">$${c.precio}</td>
+              </tr>`;
+            tabla.innerHTML += row;
+          });
+        } catch (error) {
+          console.error("Error al cargar datos del dashboard:", error);
+        }
+      }
+
+      cargarDashboard();
+    </script>
+  </body>
+</html>

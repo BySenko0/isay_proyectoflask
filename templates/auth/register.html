@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro - MundoFriki</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/flowbite@latest/dist/flowbite.js"></script>
+  </head>
+  <body class="min-h-screen bg-gray-50">
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b">
+      <div class="container mx-auto px-4 py-3">
+        <div class="flex items-center text-sm text-gray-500">
+          <a href="/" class="hover:text-red-600">Inicio</a>
+          <svg class="h-4 w-4 mx-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+          <span class="text-gray-900 font-medium">Registro</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulario de Registro -->
+    <div class="container mx-auto px-4 py-12">
+      <div class="max-w-md mx-auto">
+        <!-- Encabezado -->
+        <div class="text-center mb-8">
+          <a href="/" class="inline-block text-3xl font-bold">
+            Mundo<span class="text-red-600">Friki</span>
+          </a>
+          <h1 class="text-2xl font-bold mt-6 mb-2">Crea una cuenta</h1>
+          <p class="text-gray-600">Únete a nuestra comunidad friki</p>
+        </div>
+
+        <!-- Tarjeta del formulario -->
+        <div class="bg-white rounded-lg shadow-md p-8">
+          <form method="POST" action="/register">
+            <div class="grid grid-cols-2 gap-4 mb-6">
+              <div>
+                <label for="first-name" class="block text-gray-700 font-medium mb-2">Nombre</label>
+                <input
+                  type="text"
+                  id="first-name"
+                  name="first_name"
+                  class="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500"
+                  placeholder="Juan"
+                  required
+                />
+              </div>
+              <div>
+                <label for="last-name" class="block text-gray-700 font-medium mb-2">Apellido</label>
+                <input
+                  type="text"
+                  id="last-name"
+                  name="last_name"
+                  class="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500"
+                  placeholder="Pérez"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <label for="email" class="block text-gray-700 font-medium mb-2">Correo electrónico</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500"
+                placeholder="tucorreo@ejemplo.com"
+                required
+              />
+            </div>
+
+            <div class="mb-6">
+              <label for="password" class="block text-gray-700 font-medium mb-2">Contraseña</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500"
+                placeholder="••••••••"
+                required
+              />
+              <p class="text-xs text-gray-500 mt-1">
+                La contraseña debe tener al menos 8 caracteres, un número y un carácter especial.
+              </p>
+            </div>
+
+            <div class="mb-6">
+              <label for="confirm-password" class="block text-gray-700 font-medium mb-2">Confirmar contraseña</label>
+              <input
+                type="password"
+                id="confirm-password"
+                name="confirm_password"
+                class="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+
+            <div class="flex items-center mb-6">
+              <input
+                type="checkbox"
+                id="terms"
+                name="terms"
+                class="h-4 w-4 text-red-600 rounded border-gray-300 focus:ring-red-500"
+                required
+              />
+              <label for="terms" class="ml-2 text-gray-700 text-sm">
+                Acepto los
+                <a href="/terms" class="text-red-600 hover:underline">Términos de servicio</a> y la
+                <a href="/privacy" class="text-red-600 hover:underline">Política de privacidad</a>.
+              </label>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-3 rounded-md transition duration-300"
+            >
+              Crear cuenta
+            </button>
+          </form>
+
+          <!-- Enlace para iniciar sesión -->
+          <div class="text-center mt-8">
+            <p class="text-gray-600">
+              ¿Ya tienes una cuenta?
+              <a href="/login" class="text-red-600 hover:text-red-800 font-medium">Inicia sesión</a>
+            </p>
+          </div>
+        </div>
+
+        <!-- Información adicional -->
+        <div class="text-center mt-8 text-sm text-gray-500">
+          <p>Al crear una cuenta, recibirás novedades, ofertas especiales y promociones exclusivas.</p>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

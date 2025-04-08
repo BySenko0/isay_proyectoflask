@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agregar Cómic - Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Encabezado -->
+    <header class="bg-white shadow-sm z-10">
+      <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <div class="flex items-center">
+          <a href="/admin" class="text-xl font-bold">Mundo<span class="text-red-600">Friki</span></a>
+          <span class="ml-2 bg-red-600 text-white text-xs px-2 py-1 rounded">Admin</span>
+        </div>
+        <div>
+          <img src="/static/img/admin-user.jpg" alt="Admin" class="h-8 w-8 rounded-full" />
+        </div>
+      </div>
+    </header>
+
+    <!-- Contenido -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+      <div class="mb-6">
+        <nav class="text-sm text-gray-600 flex items-center">
+          <a href="/admin" class="hover:text-red-600">Dashboard</a>
+          <span class="mx-2">></span>
+          <a href="/admin/comics" class="hover:text-red-600">Cómics</a>
+          <span class="mx-2">></span>
+          <span class="text-gray-900 font-medium">Agregar Cómic</span>
+        </nav>
+      </div>
+
+      <div class="flex justify-between items-center mb-6">
+        <div>
+          <h1 class="text-2xl font-bold">Agregar Nuevo Cómic</h1>
+          <p class="text-gray-600">Rellena los campos para registrar un nuevo cómic</p>
+        </div>
+        <div class="space-x-2">
+          <button type="submit" form="comicForm" class="px-4 py-2 border border-gray-300 bg-white rounded-md text-gray-700 hover:bg-gray-50">Guardar como borrador</button>
+          <button type="submit" form="comicForm" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">Publicar Cómic</button>
+        </div>
+      </div>
+
+      <!-- FORMULARIO -->
+      <form id="comicForm" method="POST" action="/admin/comics/crear" enctype="multipart/form-data" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Principal -->
+        <div class="lg:col-span-2 space-y-6">
+          <div class="bg-white p-6 rounded-lg shadow">
+            <h2 class="text-lg font-semibold mb-4">Información Básica</h2>
+
+            <label class="block text-sm mb-1">Título *</label>
+            <input type="text" name="nombre" class="w-full border rounded px-4 py-2 mb-4" placeholder="Ej. Batman: Año Uno" required />
+
+            <label class="block text-sm mb-1">Autor *</label>
+            <input type="text" name="autor" class="w-full border rounded px-4 py-2 mb-4" placeholder="Ej. Frank Miller" required />
+
+            <label class="block text-sm mb-1">Descripción *</label>
+            <textarea name="descripcion" rows="4" class="w-full border rounded px-4 py-2" placeholder="Describe el cómic..." required></textarea>
+
+            <div class="grid grid-cols-2 gap-4 mt-4">
+              <div>
+                <label class="block text-sm mb-1">Editorial *</label>
+                <input type="text" name="editorial" class="w-full border rounded px-4 py-2" placeholder="Ej. DC Comics" required />
+              </div>
+              <div>
+                <label class="block text-sm mb-1">Fecha de lanzamiento</label>
+                <input type="date" name="fecha_lanzamiento" class="w-full border rounded px-4 py-2" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mt-4">
+              <div>
+                <label class="block text-sm mb-1">Formato</label>
+                <select name="formato" class="w-full border rounded px-4 py-2">
+                  <option value="">Seleccionar</option>
+                  <option value="Físico">Físico</option>
+                  <option value="Digital">Digital</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm mb-1">Idioma</label>
+                <select name="idioma" class="w-full border rounded px-4 py-2">
+                  <option value="">Seleccionar</option>
+                  <option value="Español">Español</option>
+                  <option value="Inglés">Inglés</option>
+                  <option value="Japonés">Japonés</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow">
+            <h2 class="text-lg font-semibold mb-4">Precio e Inventario</h2>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm mb-1">Precio *</label>
+                <input type="number" step="0.01" name="precio" class="w-full border rounded px-4 py-2" placeholder="Precio" required />
+              </div>
+              <div>
+                <label class="block text-sm mb-1">Stock *</label>
+                <input type="number" name="stock" class="w-full border rounded px-4 py-2" placeholder="Cantidad en stock" required />
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <label class="block text-sm mb-1">Proveedor *</label>
+              <select name="proveedor_id" class="w-full border rounded px-4 py-2" required>
+                <option value="">Seleccionar proveedor</option>
+                {% for proveedor in proveedores %}
+                  <option value="{{ proveedor.id_proveedor }}">{{ proveedor.nombre }}</option>
+                {% endfor %}
+              </select>
+              
+              
+              <!-- Si quieres cargarlo dinámicamente: usa un select -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-6">
+          <div class="bg-white p-6 rounded-lg shadow">
+            <h2 class="text-lg font-semibold mb-4">Portada</h2>
+            <input type="file" name="imagen" accept="image/*" class="w-full" required />
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow">
+            <h2 class="text-lg font-semibold mb-4">Categoría</h2>
+            <select name="categoria" class="w-full border rounded px-4 py-2 mb-4" required>
+              <option value="">Selecciona categoría</option>
+              <option value="Cómic">Cómic</option>
+              <option value="Manga">Manga</option>
+              <option value="Sci-fi">Sci-fi</option>
+            </select>
+          </div>
+        </div>
+      </form>
+
+      <!-- Acciones -->
+      <div class="mt-6 flex justify-end space-x-3">
+        <a href="/admin/comics" class="px-4 py-2 bg-white border rounded-md hover:bg-gray-50">Cancelar</a>
+        <button type="submit" form="comicForm" class="px-4 py-2 border rounded-md bg-white hover:bg-gray-50">Guardar como borrador</button>
+        <button type="submit" form="comicForm" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">Publicar Cómic</button>
+      </div>
+    </main>
+  </body>
+</html>
